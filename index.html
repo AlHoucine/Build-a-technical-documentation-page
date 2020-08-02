@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>CodePen - Build a Technical Documentation Page</title>
+  <link rel="stylesheet" href="./style.css">
+
+</head>
+
+<body>
+  <!-- partial:index.partial.html -->
+  <div id="nav-bar">
+    <nav id="navbar">
+      <header>
+        <h2 class="header-title"><strong>Git Documentation</strong></h2>
+      </header>
+      <hr>
+      <a class="nav-link" href="#Introduction">Introduction</a>
+      <hr>
+      <a class="nav-link" href="#About_Version_Control">About Version Control</a>
+      <hr>
+      <a class="nav-link" href="#What_is_Git">What is Git</a>
+      <hr>
+      <a class="nav-link" href="#The_working_tree">The working tree</a>
+      <hr>
+      <a class="nav-link" href="#Getting_a_Git_Repository">Getting a Git Repository</a>
+      <hr>
+      <a class="nav-link" href="#Recording_Changes_to_the_Repository">Recording Changes to the Repository</a>
+      <hr>
+      <a class="nav-link" href="#Viewing_the_Commit_History">Viewing the Commit History</a>
+      <hr>
+      <a class="nav-link" href="#Undoing_Things">Undoing Things</a>
+      <hr>
+      <a class="nav-link" href="#Working_with_Remotes">Working with Remotes</a>
+      <hr>
+      <a class="nav-link" href="#Tagging">Tagging</a>
+      <hr>
+      <a class="nav-link" href="#Git_Aliases">Git Aliases</a>
+      <hr>
+      <a class="nav-link" href="#Main_porcelain_commands">Main porcelain commands</a>
+      <hr>
+      <a class="nav-link" href="#Ancillary_Commands">Ancillary Commands</a>
+      <hr>
+      <a class="nav-link" href="#Interacting_with_Others">Interacting with Others</a>
+      <hr>
+      <a class="nav-link" href="#Manipulation_commands">Manipulation commands</a>
+      <hr>
+      <a class="nav-link" href="#Reference">Reference</a>
+      <hr>
+    </nav>
+  </div>
+
+  <main id="main-doc">
+    <section id="Introduction" class="main-section">
+      <header>
+        <h2>Introduction</h2>
+      </header>
+      <p>The Linux kernel is an open source software project of fairly large scope. For most of the lifetime of the
+        Linux kernel maintenance (1991–2002), changes to the software were passed around as patches and archived files.
+        In 2002, the Linux kernel project began using a proprietary DVCS called BitKeeper.<br>In 2005, the relationship
+        between the community that developed the Linux kernel and the commercial company that developed BitKeeper broke
+        down, and the tool’s free-of-charge status was revoked.<br>
+        Some of the goals of the new system were as follows:
+      <ul>
+        <li>Speed</li>
+        <li>Simple design</li>
+        <li>Strong support for non-linear development (thousands of parallel branches)</li>
+        <li>Fully distributed</li>
+        <li>Able to handle large projects like the Linux kernel efficiently (speed and data size)</li>
+      </ul>
+      </p>
+
+    </section>
+    <section id="About_Version_Control" class="main-section">
+      <header>
+        <h2>About Version Control</h2>
+      </header>
+      <p>Version control is a system that records changes to a file or set of files over time so that you can recall
+        specific versions later.<br>
+        If you are a graphic or web designer and want to keep every version of an image or layout (which you would most
+        certainly want to), a Version Control System (VCS) is a very wise thing to use. It allows you to revert selected
+        files back to a previous state, revert the entire project back to a previous state, compare changes over time,
+        see who last modified something that might be causing a problem, who introduced an issue and when, and more
+      <ul>
+        <li>Local Version Control Systems</li>
+        <li>Centralized Version Control Systems</li>
+      </ul>
+      </p>
+
+    </section>
+    <section id="What_is_Git" class="main-section">
+      <header>
+        <h2>What is Git</h2>
+      </header>
+      <p>The major difference between Git and any other VCS (Subversion and friends included) is the way Git thinks
+        about its data. Conceptually, most other systems store information as a list of file-based changes. These other
+        systems (CVS, Subversion, Perforce, Bazaar, and so on) think of the information they store as a set of files and
+        the changes made to each file over time (this is commonly described as <code class="code">delta-based</code>
+        version
+        control).<br>
+        Git thinks of its data more like a series of snapshots of a miniature filesystem. With Git, every time you
+        commit, or save the state of your project, Git basically takes a picture of what all your files look like at
+        that moment and stores a reference to that snapshot. To be efficient, if files have not changed, Git doesn’t
+        store the file again, just a link to the previous identical file it has already stored. Git thinks about its
+        data more like a <strong>stream of snapshots</strong>.<br>
+        Git has three main states that your files can reside in: <code class="code">modified</code>, <code
+          class="code">staged</code>, and
+        <code class="code">committed</code> :
+      <ul>
+        <li>Modified means that you have changed the file but have not committed it to your database yet.</li>
+        <li>Staged means that you have marked a modified file in its current version to go into your next commit
+          snapshot.</li>
+        <li>Committed means that the data is safely stored in your local database.</li>
+      </ul>
+      </p>
+
+    </section>
+    <section id="The_working_tree" class="main-section">
+      <header>
+        <h2>The working tree</h2>
+      </header>
+      <p>
+        The working tree is a single checkout of one version of the project. These files are pulled out of the
+        compressed database in the Git directory and placed on disk for you to use or modify.<br><br>
+        The staging area is a file, generally contained in your Git directory, that stores information about what will
+        go into your next commit. Its technical name in Git parlance is the “index”, but the phrase “staging area” works
+        just as well.<br><br>
+        The Git directory is where Git stores the metadata and object database for your project. This is the most
+        important part of Git, and it is what is copied when you <code class="code">clone</code> a repository from
+        another
+        computer.<br><br>
+        The basic Git workflow goes something like this:<br>
+      <ol>
+        <li>You modify files in your working tree.</li>
+        <li>You selectively stage just those changes you want to be part of your next commit, which adds only those
+          changes to the staging area.</li>
+        <li>You do a commit, which takes the files as they are in the staging area and stores that snapshot permanently
+          to your Git directory.</li>
+      </ol>
+      If a particular version of a file is in the Git directory, it’s considered <code class="code">committed.</code> If
+      it has been
+      modified and was added to the staging area, it is <code class="code">staged.</code> And if it was changed since it
+      was checked
+      out but has not been staged, it is <code class="code">modified.</code>
+      </p>
+
+    </section>
+    <section id="Getting_a_Git_Repository" class="main-section">
+      <header>
+        <h2>Getting a Git Repository</h2>
+      </header>
+      <p>You typically obtain a Git repository in one of two ways:
+      <ol>
+        <li>You can take a local directory that is currently not under version control, and turn it into a Git
+          repository, or</li>
+        <li>You can <code class="code">clone</code> an existing Git repository from elsewhere.</li>
+      </ol>
+      <h4>Initializing a Repository in an Existing Directory</h4><br>
+      If you have a project directory that is currently not under version control and you want to start controlling it
+      with Git, you first need to go to that project’s directory.<br>
+      for Linux:<br><br>
+      <code class="code">$ cd /home/user/my_project</code><br><br>
+      for macOS:<br><br>
+      <code class="code">$ cd /Users/user/my_project</code><br><br>
+      for Windows:<br><br>
+      <code class="code">$ cd C:/Users/user/my_project</code><br><br>
+      and type:<br><br>
+      <code class="code">$ git init</code><br><br>
+      If you want to start version-controlling existing files (as opposed to an empty directory), you should probably
+      begin tracking those files and do an initial commit. You can accomplish that with a few <code
+        class="code">git add</code>
+      commands that specify the files you want to track, followed by a <code class="code">git commit</code>:<br><br>
+
+      <code class="code">$ git add *.c<br>
+    $ git add LICENSE<br>
+    $ git commit -m 'Initial project version'</code><br>
+      <h4>Cloning an Existing Repository</h4>
+      You clone a repository with <code class="code">git clone <url></code>. For example, if you want to clone the Git
+      linkable
+      library called <code class="code">libgit2</code>, you can do so like this:<br><br>
+      <code class="code">$ git clone https://github.com/ibgit2/libgit2</code><br><br>
+      If you want to clone the repository into a directory named something other than <code class="code">libgit2</code>,
+      you can specify the new directory name as an addtional argument:<br><br>
+      <code class="code">$ git clone https://github.com/libgit2/libgit2 mylibgit</code>
+      </p>
+
+    </section>
+    <section id="Recording_Changes_to_the_Repository" class="main-section">
+      <header>
+        <h2>Recording Changes to the Repository</h2>
+      </header>
+      <p>Each file in your working directory can be in one of two states: <code class="code">tracked</code> or
+        <code class="code">untracked</code>.<br> Tracked files are files that were in the last snapshot; they can be
+        unmodified,
+        modified, or staged. In short, tracked files are files that Git knows about.<br>
+        Untracked files are everything else — any files in your working directory that were not in your last snapshot
+        and are not in your staging area. When you first clone a repository, all of your files will be tracked and
+        unmodified because Git just checked them out and you haven’t edited anything.<br>
+      <h4>Checking the Status of Your Files</h4>
+      <code class="code">$ git status<br>
+            On branch master<br>
+            Your branch is up-to-date with 'origin/master'.<br>
+                  nothing to commit, working directory clean</code><br><br>
+      Let’s say you add a new file to your project, a simple <code class="code">README</code> file. If the file didn’t
+      exist before,
+      and you run <code class="code">git status</code>, you see your untracked file like so:<br><br>
+      <code class="code">$ echo 'My Project' > README<br>
+            $ git status<br>
+            On branch master<br>
+            Your branch is up-to-date with 'origin/master'.<br>
+            Untracked files:<br>
+            &#160;(use "git add &#60;file&#62;..." to include in what will be committed)<br>
+            <br>
+             &#160;&#160;README<br><br>
+            
+                  nothing added to commit but untracked files present (use "git add" to track)</code><br>
+      <h4>Tracking New Files</h4>
+      In order to begin tracking a new file, you use the command <code class="code">git add.</code> To begin tracking
+      the
+      <code class="code">README</code> file, you can run this:<br>
+      <code class="code">$ git add README</code><br>
+      <h4>Staging Modified Files</h4>
+      The <code class="code">CONTRIBUTING.md</code> file appears under a section named “Changes not staged for
+      commit” — which means
+      that a file that is tracked has been modified in the working directory but not yet staged. To stage it, you run
+      the <code class="code">git add</code> command. <code class="code">git add</code> is a multipurpose command — you
+      use it to begin tracking
+      new files, to stage files, and to do other things like marking merge-conflicted files as resolved. It may be
+      helpful to think of it more as “add precisely this content to the next commit” rather than “add this file to the
+      project”.<br>
+      <h4>Short Status</h4>
+      While the <code class="code">git status</code> output is pretty comprehensive, it’s also quite wordy. Git also has
+      a short
+      status flag so you can see your changes in a more compact way. If you run <code class="code">git status -s</code>
+      or <code class="code">git status --short</code> you get a far more simplified output from the command:<br><br>
+      <code class="code">$ git status -s<br>
+            &#160;M README<br>
+            MM Rakefile<br>
+            A  lib/git.rb<br>
+            M  lib/simplegit.rb<br>
+                ?? LICENSE.txt</code>
+      <h4>Ignoring Files</h4>
+      Often, you’ll have a class of files that you don’t want Git to automatically add or even show you as being
+      untracked. These are generally automatically generated files such as log files or files produced by your build
+      system. In such cases, you can create a file listing patterns to match them named <code
+        class="code">.gitignore</code>.<br>
+      The rules for the patterns you can put in the <code class="code">.gitignore</code> file are as follows:<br>
+      <ul>
+        <li>Blank lines or lines starting with <code class="code">#</code> are ignored.</li>
+        <li>Standard glob patterns work, and will be applied recursively throughout the entire working tree.</li>
+        <li>You can start patterns with a forward slash (<code class="code">/</code>) to avoid recursivity.</li>
+        <li>You can end patterns with a forward slash (<code class="code">/</code>) to specify a directory.</li>
+        <li>You can negate a pattern by starting it with an exclamation point (<code class="code">!</code>).</li>
+      </ul>
+      Here is another example <code class="code">.gitignore</code> file:<br><br>
+      <code class="code">
+            # ignore all .a files<br>
+            *.a<br>
+            # but do track lib.a, even though you're ignoring .a files above<br>
+            !lib.a<br>
+            # only ignore the TODO file in the current directory, not subdir/TODO<br>
+            /TODO<br>
+            # ignore all files in any directory named build<br>
+            build/<br>
+            # ignore doc/notes.txt, but not doc/server/arch.txt<br>
+            doc/*.txt<br>
+            # ignore all .pdf files in the doc/ directory and any of its subdirectories<br>
+            doc/**/*.pdf<br>
+                </code>
+      </p>
+    </section>
+
+    <section id="Viewing_the_Commit_History" class="main-section">
+      <header>
+        <h2>Viewing the Commit History</h2>
+      </header>
+      <p>After you have created several commits, or if you have cloned a repository with an existing commit history,
+        you’ll probably want to look back to see what has happened. The most basic and powerful tool to do this is the
+        <code class="code">git log</code> command.</p>
+    </section>
+
+    <section id="Undoing_Things" class="main-section">
+      <header>
+        <h2>Undoing Things</h2>
+      </header>
+      <p>
+        One of the common undos takes place when you commit too early and possibly forget to add some files, or you mess
+        up your commit message. If you want to redo that commit, make the additional changes you forgot, stage them, and
+        commit again using the <code class="code">--amend</code> option:<br>
+        <code class="code">$ git commit --amend</code>
+      </p>
+    </section>
+
+    <section id="Working_with_Remotes" class="main-section">
+      <header>
+        <h2>Working with Remotes</h2>
+      </header>
+      <p>
+      <h4>Showing Your Remotes</h4>
+      To see which remote servers you have configured, you can run the <code class="code">git remote</code> command. It
+      lists the
+      shortnames of each remote handle you’ve specified. If you’ve cloned your repository, you should at least see
+      <code class="code">origin</code> — that is the default name Git gives to the server you cloned from.<br>
+      You can also specify <code class="code">-v</code>, which shows you the URLs that Git has stored for the shortname
+      to be used
+      when reading and writing to that remote:<br>
+      <code class="code">$ git remote -v<br>
+origin	https://github.com/schacon/ticgit (fetch)<br>
+    origin	https://github.com/schacon/ticgit (push)</code>
+      </p>
+
+    </section>
+    <section id="Tagging" class="main-section">
+      <header>
+        <h2>Tagging</h2>
+      </header>
+      <p>Like most VCSs, Git has the ability to tag specific points in a repository’s history as being important.
+        Typically, people use this functionality to mark release points (<code class="code">v1.0</code>, <code
+          class="code">v2.0</code> and so on).<br>
+      <h4>Listing Your Tags</h4>
+      Listing the existing tags in Git is straightforward. Just type git tag (with optional <code class="code">-l</code>
+      or <code class="code">--list</code>):<br>
+      <code class="code">$ git tag<br>
+      v1.0<br>
+      v2.0</code></p>
+    </section>
+      <section id="Git_Aliases" class="main-section">
+        <header>
+          <h2>Git Aliases</h2>
+        </header>
+        <p>
+          Git doesn’t automatically infer your command if you type it in partially. If you don’t want to type the entire
+          text of each of the Git commands, you can easily set up an alias for each command using
+          <code class="code">git config</code>.<br> Here are a couple of examples you may want to set up:<br><br>
+          <code class="code">$ git config --global alias.co checkout<br>
+            $ git config --global alias.br branch<br>
+            $ git config --global alias.ci commit<br>
+            $ git config --global alias.st status</code>
+        </p>
+      </section>
+
+      <section id="Main_porcelain_commands" class="main-section">
+        <header>
+          <h2>Main porcelain commands</h2>
+        </header>
+        <p>
+          <strong>git-add</strong><br>
+          &#160;&#160;Add file contents to the index<br><br>
+          <strong>git-am</strong><br>
+          &#160;&#160;Apply a series of patches from a mailbox<br><br>
+          <strong>git-archive</strong><br>
+          &#160;&#160;Create an archive of files from a named tree<br><br>
+          <strong>git-bisect</strong><br>
+          &#160;&#160;Use binary search to find the commit that introduced a bug<br><br>
+          <strong>git-branch</strong><br>
+          &#160;&#160;List, create, or delete branches<br><br>
+          <strong>git-bundle</strong><br>
+          &#160;&#160Move objects and refs by archive<br><br>
+          <strong>git-checkout</strong><br>
+          &#160;&#160;Switch branches or restore working tree files<br><br>
+          <strong>git-cherry-pick</strong><br>
+          &#160;&#160;Apply the changes introduced by some existing commits<br><br>
+          <strong>git-citool</strong><br>
+          &#160;&#160;Graphical alternative to git-commit<br><br>
+          <strong>git-clean</strong><br>
+          &#160;&#160;Remove untracked files from the working tree<br><br>
+          <strong>git-commit</strong><br>
+          &#160;&#160;Record changes to the repository<br><br>
+          <strong>git-describe</strong><br>
+          &#160;&#160;Give an object a human readable name based on an available ref<br><br>
+          <strong>git-diff</strong><br>
+          &#160;&#160;Show changes between commits, commit and working tree, etc<br><br>
+          <strong>git-fetch</strong><br>
+          &#160;&#160;Download objects and refs from another repository<br><br>
+          <strong>git-format-patch</strong><br>
+          &#160;&#160;Prepare patches for e-mail submission<br><br>
+          <strong>git-gc</strong><br>
+          &#160;&#160;Cleanup unnecessary files and optimize the local repository<br><br>
+          <strong>git-grep</strong><br>
+          &#160;&#160;Print lines matching a pattern<br><br>
+          <strong>git-gui</strong><br>
+          &#160;&#160;A portable graphical interface to Git<br><br>
+          <strong>git-init</strong><br>
+          &#160;&#160;Create an empty Git repository or reinitialize an existing one<br><br>
+          <strong>gitk</strong><br>
+          &#160;&#160;The Git repository browser<br><br>
+          <strong>git-log</strong><br>
+          &#160;&#160;Show commit logs<br><br>
+          <strong>git-merge</strong><br>
+          &#160;&#160;Join two or more development histories together<br><br>
+          <strong>git-mv</strong><br>
+          &#160;&#160;Move or rename a file, a directory, or a symlink<br><br>
+          <strong>git-notes</strong><br>
+          &#160;&#160;Add or inspect object notes<br><br>
+          <strong>git-pull</strong><br>
+          &#160;&#160;Fetch from and integrate with another repository or a local branch<br><br>
+          <strong>git-push</strong><br>
+          &#160;&#160;Update remote refs along with associated objects<br><br>
+          <strong>git-range-diff</strong><br>
+          &#160;&#160;Compare two commit ranges (e.g. two versions of a branch)<br><br>
+          <strong>git-rebase</strong><br>
+          &#160;&#160;Reapply commits on top of another base tipAdd file contents to the index<br><br>
+          <strong>git-rerset</strong><br>
+          &#160;&#160;Reset current HEAD to the specified state<br><br>
+          <strong>git-restore</strong><br>
+          &#160;&#160;Restore working tree files<br><br>
+          <strong>git-revert</strong><br>
+          &#160;&#160;Revert some existing commits<br><br>
+          <strong>git-rm</strong><br>
+          &#160;&#160;Remove files from the working tree and from the index<br><br>
+          <strong>git-shortlog</strong><br>
+          &#160;&#160;Summarize <strong>git log</strong> output<br><br>
+          <strong>git-show</strong><br>
+          &#160;&#160;Show various types of objects<br><br>
+          <strong>git-sparse-checkout</strong><br>
+          &#160;&#160;Initialize and modify the sparse-checkout<br><br>
+          <strong>git-stash</strong><br>
+          &#160;&#160;Stash the changes in a dirty working directory away<br><br>
+          <strong>git-status</strong><br>
+          &#160;&#160;Show the working tree status<br><br>
+          <strong>git-submodule</strong><br>
+          &#160;&#160;Initialize, update or inspect submodules<br><br>
+          <strong>git-switch</strong><br>
+          &#160;&#160;Switch branches<br><br>
+          <strong>git-tag</strong><br>
+          &#160;&#160;Create, list, delete or verify a tag object signed with GPG<br><br>
+          <strong>git-worktree</strong><br>
+          &#160;&#160;Manage multiple working trees<br><br>
+        </p>
+      </section>
+
+      <section id="Ancillary_Commands" class="main-section">
+        <header>
+          <h2>Ancillary Commands</h2>
+        </header>
+        <p>
+          <strong>git-config</strong><br>
+          &#160;&#160;Get and set repository or global options<br><br>
+          <strong>git-fast-export</strong><br>
+          &#160;&#160;Git data exporter<br><br>
+          <strong>git-fast-import</strong><br>
+          &#160;&#160;Backend for fast Git data importers<br><br>
+          <strong>git-filter-branch</strong><br>
+          &#160;&#160;Rewrite branches<br><br>
+          <strong>git-mergetool</strong><br>
+          &#160;&#160;Run merge conflict resolution tools to resolve merge conflicts<br><br>
+          <strong>git-pack-refs</strong><br>
+          &#160;&#160;Pack heads and tags for efficient repository access<br><br>
+          <strong>git-prune</strong><br>
+          &#160;&#160;Prune all unreachable objects from the object database<br><br>
+          <strong>git-reflog</strong><br>
+          &#160;&#160;Manage reflog information<br><br>
+          <strong>git-remote</strong><br>
+          &#160;&#160;Manage set of tracked repositories<br><br>
+          <strong>git-repack</strong><br>
+          &#160;&#160;Pack unpacked objects in a repository<br><br>
+          <strong>git-replace</strong><br>
+          &#160;&#160;Create, list, delete refs to replace objects<br><br>
+          <strong>git-annotate</strong><br>
+          &#160;&#160;Annotate file lines with commit information<br><br>
+          <strong>git-blame</strong><br>
+          &#160;&#160;Show what revision and author last modified each line of a file<br><br>
+          <strong>git-bugreport</strong><br>
+          &#160;&#160;Collect information for user to file a bug report<br><br>
+          <strong>git-count-objects</strong><br>
+          &#160;&#160;Count unpacked number of objects and their disk consumption<br><br>
+          <strong>git-difftool</strong><br>
+          &#160;&#160;Show changes using common diff tools<br><br>
+          <strong>git-fsck</strong><br>
+          &#160;&#160;Verifies the connectivity and validity of the objects in the database<br><br>
+          <strong>git-help</strong><br>
+          &#160;&#160;Display help information about Git<br><br>
+          <strong>git-instaweb</strong><br>
+          &#160;&#160;Instantly browse your working repository in gitweb<br><br>
+          <strong>git-merge-tree</strong><br>
+          &#160;&#160;Show three-way merge without touching index<br><br>
+          <strong>git-rerere</strong><br>
+          &#160;&#160;Reuse recorded resolution of conflicted merges<br><br>
+          <strong>git-show-branch</strong><br>
+          &#160;&#160;Show branches and their commits<br><br>
+          <strong>git-verify-commit</strong><br>
+          &#160;&#160;Check the GPG signature of commits<br><br>
+          <strong>git-verify-tag</strong><br>
+          &#160;&#160;Check the GPG signature of tags<br><br>
+          <strong>gitweb</strong><br>
+          &#160;&#160;Git web interface (web frontend to Git repositories)<br><br>
+          <strong>git-whatchanged</strong><br>
+          &#160;&#160;Show logs with difference each commit introduces<br><br>
+        </p>
+      </section>
+
+      <section id="Interacting_with_Others" class="main-section">
+        <header>
+          <h2>Interacting with Others</h2>
+        </header>
+        <p>
+          <strong>git-archimport</strong><br>
+          &#160;&#160;Import a GNU Arch repository into Git<br><br>
+          <strong>git-cvsexportcommit</strong><br>
+          &#160;&#160;Export a single commit to a CVS checkout<br><br>
+          <strong>git-cvsimport</strong><br>
+          &#160;&#160;Salvage your data out of another SCM people love to hate<br><br>
+          <strong>git-cvsserver</strong><br>
+          &#160;&#160;A CVS server emulator for Git<br><br>
+          <strong>git-imp-send</strong><br>
+          &#160;&#160;Send a collection of patches from stdin to an IMAP folder<br><br>
+          <strong>git-p4</strong><br>
+          &#160;&#160;Import from and submit to Perforce repositories<br><br>
+          <strong>git-quiltimport</strong><br>
+          &#160;&#160;Applies a quilt patchset onto the current branch<br><br>
+          <strong>git-request-pull</strong><br>
+          &#160;&#160;Generates a summary of pending changes<br><br>
+          <strong>git-send-email</strong><br>
+          &#160;&#160;Send a collection of patches as email<br><br>
+          <strong>git-svn</strong><br>
+          &#160;&#160;Bidirectional operation between a Subversion repository and Git<br>
+
+        </p>
+      </section>
+
+      <section id="Manipulation_commands" class="main-section">
+        <header>
+          <h2>Manipulation commands</h2>
+        </header>
+        <p>
+          <strong>git-apply</strong><br>
+          &#160;&#160;Apply a patch to files and/or to the index<br><br>
+          <strong>git-checkout-index</strong><br>
+          &#160;&#160;Copy files from the index to the working tree<br><br>
+          <strong>git-commit-graph</strong><br>
+          &#160;&#160;Write and verify Git commit-graph files<br><br>
+          <strong>git-commit-tree</strong><br>
+          &#160;&#160;Create a new commit object<br><br>
+          <strong>git-hash-object</strong><br>
+          &#160;&#160;Compute object ID and optionally creates a blob from a file<br><br>
+          <strong>git-index-pack</strong><br>
+          &#160;&#160;Build pack index file for an existing packed archive<br><br>
+          <strong>git-merge-file</strong><br>
+          &#160;&#160;Run a three-way file merge<br><br>
+          <strong>git-merge-index</strong><br>
+          &#160;&#160;Run a merge for files needing merging<br><br>
+          <strong>git-multi-pack-index</strong><br>
+          &#160;&#160;Write and verify multi-pack-indexes<br><br>
+          <strong>git-mktag</strong><br>
+          &#160;&#160;Creates a tag object<br><br>
+          <strong>git-mktree</strong><br>
+          &#160;&#160;Build a tree-object from ls-tree formatted text<br><br>
+          <strong>git-pack-objects</strong><br>
+          &#160;&#160;Create a packed archive of objects<br><br>
+          <strong>git-prune-packed</strong><br>
+          &#160;&#160;Remove extra objects that are already in pack files<br><br>
+          <strong>git-read-tree</strong><br>
+          &#160;&#160;Reads tree information into the index<br><br>
+          <strong>git-symbolic-ref</strong><br>
+          &#160;&#160;Read, modify and delete symbolic refs<br><br>
+          <strong>git-unpack-objects</strong><br>
+          &#160;&#160;Unpack objects from a packed archive<br><br>
+          <strong>git-update-index</strong><br>
+          &#160;&#160;Register file contents in the working tree to the index<br><br>
+          <strong>git-update-ref</strong><br>
+          &#160;&#160;Update the object name stored in a ref safely<br><br>
+          <strong>git-write-tree</strong><br>
+          &#160;&#160;Create a tree object from the current index<br><br>
+        </p>
+      </section>
+
+      <section id="Reference" class="main-section">
+        <header>
+          <h2>Reference</h2>
+        </header>
+        <p><code style="font-size: 30pt; color: gray;">&#60;&#47;&#62</code> All the documentation in this page is taken
+          from
+          <a href="https://git-scm.com/book/en/v2" target="_blank"><strong>Git Book</strong></a>
+        </p>
+      </section>
+  </main>
+</body>
+
+</html>

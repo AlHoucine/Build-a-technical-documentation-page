@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap');
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+  width: 100vw;  
+  background-color: #caf0f8;
+}
+h2,h4{
+  font-family: 'Roboto', sans-serif;
+}
+main>section{
+  font-family: Helvetica, sans-serif;
+  font-size: 12pt;
+  margin-left: 5px;
+}
+header{
+  background-color: black;
+  color: aliceblue;
+}
+main>section>header{
+  padding-left: 15px;
+  background-color: black;
+  color: aliceblue;
+  margin-left: -25px;
+}
+.header-title{
+  text-align: center;
+  padding: 0%;
+}
+  /*>>>>>>Nav bar<<<<<<*/
+#nav-bar{
+  top: 0;
+  background-color: #cbf3f0;
+  margin: 0;
+  min-width: 300px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  border-right: solid 1px;
+  padding-right: 0px;
+
+}
+#navbar{
+  float: left;
+  width: 100%;
+
+}
+.nav-link{
+  margin: 0px;
+  padding: 5px;
+  padding-left: 10px;
+  display: block;
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+}
+#main-doc{
+  overflow-y: auto;
+  padding-left: 15px;
+}
+.code{
+  background-color: rgb(217, 219, 213);
+}
+* {
+  box-sizing: border-box;
+  }
+a:link{
+  text-decoration: none;
+  color: black;
+}
+a:visited{
+  text-decoration: none;
+  color: black;
+}
+a:hover{
+  background-color: black;
+  color: aliceblue;
+}
+@media(max-width: 650px) {
+  #nav-bar{
+    max-width: 100%;
+    height: 300px;
+    overflow-y: auto;
+    border-bottom: solid 1px;
+    border-right: 0ch;
+    align-self: stretch;
+}
+body{
+    display: flex;
+    flex-direction: column;
+}
+}
