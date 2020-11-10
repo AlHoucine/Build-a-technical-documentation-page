@@ -6,7 +6,7 @@ body{
   flex-direction: row;
   height: 100vh;
   width: 100vw;  
-  background-color: #caf0f8;
+  background-color: rgb(245,245,245);;
 }
 h2,h4{
   font-family: 'Roboto', sans-serif;
@@ -33,7 +33,7 @@ main>section>header{
   /*>>>>>>Nav bar<<<<<<*/
 #nav-bar{
   top: 0;
-  background-color: #cbf3f0;
+  background-color: rgb(211,211,211);
   margin: 0;
   min-width: 300px;
   flex-shrink: 0;
@@ -45,7 +45,6 @@ main>section>header{
 #navbar{
   float: left;
   width: 100%;
-
 }
 .nav-link{
   margin: 0px;
